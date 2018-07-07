@@ -16,3 +16,20 @@ Binary-IO handles this by efficiently reversing input the order of read bytes if
 **Block IO**
 
 In topics such as 3d model storage and loading, it's important to minimize overhead time, so Binary-IO implements a functionality called Block IO which lets entire blocks of data to be written at once.
+
+---
+
+Examples:
+  BinaryWriter writer("ImageData.bin");
+	//Sign the binary with a tag and a version so that it'll be easy to detect if we're reading an old version
+	writer.writeHeader("img", Version(1, 0, 0));
+	//Write the width and height
+	writer.write<unsigned int>(width);
+	writer.write<unsigned int>(height);
+	//Send the image pixel data to be written
+	//Previously defined: float* pixelData = ...;
+	writer.writeBlock<float, unsigned int>(
+		pixelData,
+		width * height * 3, //Every pixel has 3 color channels
+	);
+	writer.close(); //Optional
