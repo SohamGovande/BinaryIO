@@ -33,7 +33,7 @@ writer.write<unsigned int>(height);
 //Previously defined: float* pixelData = ...;
 writer.writeBlock<float, unsigned int>(
 	pixelData,
-	width * height * 3, //Every pixel has 3 color channels
+	width * height * 3 //Every pixel has 3 color channels
 );
 writer.close(); //Optional
 ```
