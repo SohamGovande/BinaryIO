@@ -20,6 +20,7 @@ In topics such as 3d model storage and loading, it's important to minimize overh
 ---
 
 **Examples**
+
 Writing data:
 ```cpp
 BinaryWriter writer("ImageData.bin");
