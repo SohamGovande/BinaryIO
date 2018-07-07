@@ -1,2 +1,18 @@
 # Binary-IO
-C++ library for binary file input &amp; output that handles the problem of system endianness!
+C++ library for binary file input and output that handles the problem of system endianness!
+
+Often, the C++ programming language is used to create efficient programs, and it's necessary to rapidly read and write data from a filesystem. Traditional ASCII-based formats such as XML, JSON, or Properties, albeit trouble-free, are verbose - thereby occupying more disk space - and take vastly longer time to parse into structures within a program. Binary files, on the other hand, are compact, fast, and are easily convertible into program structures.
+
+Binary-IO is a fast, efficient, and simple library you can use to do all this.
+
+---
+
+**Endianness**
+
+Endianness is an OS property that determines whether the first byte has the highest order or the last one does. For instance, the 4-byte set 01 00 00 00 could mean 16777216, like on big-endian systems, or just 1, on little-endian systems, depending on whether the 1 has the place value 0 or 6. When dealing with binary files, it's important to deal with this correctly or bytes could be read in reversed order, thereby representing a different value and corrupting data.
+
+Binary-IO handles this by efficiently reversing input the order of read bytes if on a big-endian systemm, or if the system is little-endian, writing bytes in their raw order.
+
+**Block IO**
+
+In topics such as 3d model storage and loading, it's important to minimize overhead time, so Binary-IO implements a functionality called Block IO which lets entire blocks of data to be written at once.
