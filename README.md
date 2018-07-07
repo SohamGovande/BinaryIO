@@ -19,7 +19,8 @@ In topics such as 3d model storage and loading, it's important to minimize overh
 
 ---
 
-Examples:
+**Examples**
+Writing data:
 ```cpp
 BinaryWriter writer("ImageData.bin");
 //Sign the binary with a tag and a version so that it'll be easy to detect if we're reading an old version
@@ -34,4 +35,16 @@ writer.writeBlock<float, unsigned int>(
 	width * height * 3, //Every pixel has 3 color channels
 );
 writer.close(); //Optional
+```
+Reading data:
+```cpp
+BinaryReader reader("ImageData.bin");
+//Ensure that the file is the right type and of the right version, or else discard it
+reader.ensureHeader("img", Version(1, 0, 0));
+//Load dimensions, then once we know the size, read the pixel data
+unsigned int width = reader.read<unsigned int>();
+unsigned int height = reader.read<unsigned int>();
+float* pixelData = reader.readBlock<float, unsigned int>(width * height * 3);
+reader.close(); //Optional
+//Do stuff with width, height, and pixelData! :D
 ```
